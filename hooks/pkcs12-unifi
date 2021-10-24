@@ -1,0 +1,58 @@
+#!/bin/bash
+# 2019-2020 dlitz
+# Convert cert to keystore format supported by unifi (PKCS#12; original format is "jks", but that's deprecated apparently)
+#
+# Put this into ${ACME_STATE_DIR}/conf/perm:
+#   certs/*/unifi.p12 0640 0755 - unifi
+# Then replace /var/lib/unifi/keystore with a symlink to the generated unifi.p12 file.
+set -e
+
+[ -n "$ACME_STATE_DIR" ] || ACME_STATE_DIR="/var/lib/acme"
+
+RELOAD=1
+
+EVENT_NAME="$1"
+shift 1
+
+case "$EVENT_NAME" in
+    live-updated)
+        [ -e /var/lib/unifi ] || exit 42
+
+        # Output file should never be world-readable
+        umask 077
+
+
+        # Write configuration to conf/perm if not already present
+        if ! egrep -q '^certs/\*/unifi.p12\b' "$ACME_STATE_DIR/conf/perm"; then
+            [ -d "$ACME_STATE_DIR/conf" ] || mkdir "$ACME_STATE_DIR/conf"
+            printf '# The following line was added automatically for pkcs12-unifi:\ncerts/*/unifi.p12 0640 0755 - unifi\n' >> "$ACME_STATE_DIR/conf/perm"
+        fi
+
+        while read -r name; do
+            certdir="$ACME_STATE_DIR/live/$name"
+            if [ -z "$name" -o ! -e "$certdir" ]; then
+                continue
+            fi
+
+            openssl pkcs12 -export \
+                -name unifi \
+                -passout pass:aircontrolenterprise \
+                -in "$certdir"/fullchain \
+                -inkey "$certdir"/privkey \
+                -out "$certdir"/unifi.p12
+
+            # HACK: acmetool also sets these perms, but only on the next invocation
+            chown root:unifi "$certdir"/unifi.p12
+            chmod 640 "$certdir"/unifi.p12
+        done
+
+        # Reload the service
+        if ! [ -z "$RELOAD" -o "$RELOAD" = "0" ]; then
+            systemctl try-reload-or-restart unifi
+        fi
+        ;;
+
+    *)
+        exit 42
+        ;;
+esac
