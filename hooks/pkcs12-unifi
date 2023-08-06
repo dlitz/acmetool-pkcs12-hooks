@@ -54,7 +54,7 @@ case "$EVENT_NAME" in
 
         # Reload the service
         if ! [ -z "$RELOAD" -o "$RELOAD" = "0" ]; then
-            systemctl try-reload-or-restart unifi
+            systemctl try-reload-or-restart --no-block unifi
         fi
         ;;
 
