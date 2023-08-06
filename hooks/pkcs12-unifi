@@ -1,17 +1,23 @@
 #!/bin/bash
-# 2019-2020 dlitz
+# 2019-2020,2023 dlitz
 # Convert cert to keystore format supported by unifi (PKCS#12; original format is "jks", but that's deprecated apparently)
 #
 # Put this into ${ACME_STATE_DIR}/conf/perm:
 #   certs/*/unifi.p12 0640 0755 - unifi
 # Then replace /var/lib/unifi/keystore with a symlink to the generated unifi.p12 file.
-set -e
 
-[ -n "$ACME_STATE_DIR" ] || ACME_STATE_DIR="/var/lib/acme"
+unset RELOAD
 
-RELOAD=1
+[ -e "/etc/default/acmetool-pkcs12-unifi-hook" ] && . /etc/default/acmetool-pkcs12-unifi-hook
+[ -e "/etc/conf.d/acmetool-pkcs12-unifi-hook" ] && . /etc/conf.d/acmetool-pkcs12-unifi-hook
 
-EVENT_NAME="$1"
+set -eu
+
+[ -n "${ACME_STATE_DIR-}" ] || ACME_STATE_DIR="/var/lib/acme"
+
+RELOAD=${RELOAD:-1}
+
+EVENT_NAME="${1-}"
 shift 1
 
 case "$EVENT_NAME" in
@@ -23,7 +29,7 @@ case "$EVENT_NAME" in
 
 
         # Write configuration to conf/perm if not already present
-        if ! egrep -q '^certs/\*/unifi.p12\b' "$ACME_STATE_DIR/conf/perm"; then
+        if ! grep -qE '^(#\s)?certs/\*/unifi.p12\b' "$ACME_STATE_DIR/conf/perm"; then
             [ -d "$ACME_STATE_DIR/conf" ] || mkdir "$ACME_STATE_DIR/conf"
             printf '# The following line was added automatically for pkcs12-unifi:\ncerts/*/unifi.p12 0640 0755 - unifi\n' >> "$ACME_STATE_DIR/conf/perm"
         fi
