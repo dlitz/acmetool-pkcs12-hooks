@@ -9,7 +9,13 @@ script and client for [Ubiquiti's "unifi" server](https://ui.com/download/releas
 Installation instructions
 =========================
 
-Copy the hook script to `/etc/acme/hooks/`.
+Copy the hook script to `/etc/acme/hooks/`, then replace
+`/var/lib/unifi/keystore` with a symlink to the generated unifi.p12 file:
+
+    if [ -e /var/lib/unifi/keystore ]; then
+        mv -vT /var/lib/unifi/keystore /var/lib/unifi/keystore~
+    fi
+    ln -sT /var/lib/acme/live/example.net/unifi.p12 /var/lib/unifi/keystore
 
 Command-line usage
 ==================
