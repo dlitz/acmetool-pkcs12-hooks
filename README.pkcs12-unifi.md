@@ -1,10 +1,12 @@
-acme-dns hook for Ubiquiti UniFi Controller
-===========================================
+acmetool hook for generating PKCS#12 keytores
+=============================================
 
-This is a work in progress.
+This is an [acmetool](https://github.com/hlandau/acme) hook that generates
+PKCS#12-format keystores.
 
-This is an [acmetool](https://github.com/hlandau/acme) DNS validation hook
-script and client for [Ubiquiti's "unifi" server](https://ui.com/download/releases/network-server).
+It currently only works for [Ubiquiti's "unifi" network server
+package](https://ui.com/download/releases/network-server), but could easily be
+improved to support other software.
 
 Installation instructions
 =========================
@@ -15,7 +17,7 @@ Copy the hook script to `/etc/acme/hooks/`, then replace
     if [ -e /var/lib/unifi/keystore ]; then
         mv -vT /var/lib/unifi/keystore /var/lib/unifi/keystore~
     fi
-    ln -sT /var/lib/acme/live/example.net/unifi.p12 /var/lib/unifi/keystore
+    ln -sT ../acme/live/example.net/unifi.p12 /var/lib/unifi/keystore
 
 Command-line usage
 ==================
