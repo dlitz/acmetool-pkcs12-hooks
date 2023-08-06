@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/sbin/acmetool-pkcs12-unifi-hook "$@"

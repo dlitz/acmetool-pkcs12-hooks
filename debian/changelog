@@ -1,0 +1,5 @@
+acmetool-pkcs12-hooks (0.0.0) UNRELEASED; urgency=medium
+
+  * Initial .deb package release.
+
+ -- Darsey Litzenberger <dlitz@dlitz.net>  Sun, 06 Aug 2023 02:25:25 -0600

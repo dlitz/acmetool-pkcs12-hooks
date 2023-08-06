@@ -1,0 +1,7 @@
+/*.debhelper.log
+/*.substvars
+/.debhelper/
+/acmetool-pkcs12-unifi-hook/
+/debhelper-build-stamp
+/files
+/tmp/

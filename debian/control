@@ -1,0 +1,26 @@
+Source: acmetool-pkcs12-hooks
+Section: web
+Priority: optional
+Maintainer: Darsey Litzenberger <dlitz@dlitz.net>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+Standards-Version: 4.6.2
+Homepage: https://github.com/dlitz/acmetool-pkcs12-hooks
+Vcs-Browser: https://github.com/dlitz/acmetool-pkcs12-hooks
+Vcs-Git: https://github.com/dlitz/acmetool-pkcs12-hooks.git
+
+Package: acmetool-pkcs12-unifi-hook
+Architecture: all
+Depends:
+ openssl,
+ ${misc:Depends},
+Recommends:
+ acmetool,
+Enhances:
+ unifi,
+Description: acmetool hook for unifi server
+ This is an acmetool DNS validation hook script and client for Ubiquiti's unifi
+ server (a.k.a. "UniFi Controller" a.k.a. "UniFi Network Server").
+ .
+ The authors of this package have no affiliation with Ubiquiti.
