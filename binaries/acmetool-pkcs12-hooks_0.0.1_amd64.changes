@@ -1,0 +1,42 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Sun, 06 Aug 2023 04:36:21 -0600
+Source: acmetool-pkcs12-hooks
+Binary: acmetool-pkcs12-unifi-hook
+Architecture: source all
+Version: 0.0.1
+Distribution: dlitz-aptly
+Urgency: medium
+Maintainer: Darsey Litzenberger <dlitz@dlitz.net>
+Changed-By: Darsey Litzenberger <dlitz@dlitz.net>
+Description:
+ acmetool-pkcs12-unifi-hook - acmetool hook for unifi server
+Changes:
+ acmetool-pkcs12-hooks (0.0.1) dlitz-aptly; urgency=medium
+ .
+   * Initial .deb package release.
+Checksums-Sha1:
+ c887b4cdd8d2b5dd478f03a239e27078b6575e75 1083 acmetool-pkcs12-hooks_0.0.1.dsc
+ f512f2413298ff7cf401f28c9adb6dfdf71cc8f7 2824 acmetool-pkcs12-hooks_0.0.1.tar.xz
+ b491e98bf6f6be19a27b2f07de9d75e1059b8d41 5241 acmetool-pkcs12-hooks_0.0.1_amd64.buildinfo
+ 8ccc14e940e7bc0e032aa326d80f68cb8d8fc53c 3276 acmetool-pkcs12-unifi-hook_0.0.1_all.deb
+Checksums-Sha256:
+ 97ddc2d5b2383860f6a3694249ab9bb21e2db034dfcfb9e08a3c193aaf2db9ef 1083 acmetool-pkcs12-hooks_0.0.1.dsc
+ c10240ff24806da0c3f777574d71a3b8520dac72fde7908ffddab4c1d1e73ab1 2824 acmetool-pkcs12-hooks_0.0.1.tar.xz
+ 43b161a801d957c6d6ac8223c6f3e197b2d6a19ba5d142c7f96a4a37b6dcb6ad 5241 acmetool-pkcs12-hooks_0.0.1_amd64.buildinfo
+ 1ce27fa62b4726700e7b249d1bdaad9ca9a546d6813a43497cc05b681a9d23d3 3276 acmetool-pkcs12-unifi-hook_0.0.1_all.deb
+Files:
+ 821cc3f68ed344a3ca359b3681ea0823 1083 web optional acmetool-pkcs12-hooks_0.0.1.dsc
+ c6a0c5139fbe13d5230c3b9e6649f141 2824 web optional acmetool-pkcs12-hooks_0.0.1.tar.xz
+ 3113fd81bce2b33374b73d1b165890ea 5241 web optional acmetool-pkcs12-hooks_0.0.1_amd64.buildinfo
+ a44f4fa77a5b66a145c0ff187cacbc1b 3276 web optional acmetool-pkcs12-unifi-hook_0.0.1_all.deb
+
+-----BEGIN PGP SIGNATURE-----
+
+iIYEARYKAC4WIQTWkd0xNWtIORg6n8DjQLK2WJpUpAUCZM94lRAcZGxpdHpAZGxp
+dHoubmV0AAoJEONAsrZYmlSkR/kA/RAHuHpkQLGEevgYcNFpLFrX6Rqnz09HuOoP
+bLwdqmSJAP4188gxkM4fyPS3KNXOKLJKR+ioDyK133JFJqnRSkxbAQ==
+=DRBg
+-----END PGP SIGNATURE-----
